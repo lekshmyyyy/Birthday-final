@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise 💗</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Comic Sans MS', cursive;
+        overflow: hidden;
+    }
+
+    /* ---------- PAGE 1 ---------- */
+    #loginPage {
+        background: black;
+        color: white;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #loginPage h1 {
+        margin-bottom: 20px;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        background: pink;
+    }
+
+    /* ---------- PAGE 2 ---------- */
+    #birthdayPage {
+        display: none;
+        background: #bfe9ff;
+        height: 100vh;
+        text-align: center;
+        position: relative;
+        padding-top: 100px;
+        overflow: hidden;
+    }
+
+    .title {
+        font-size: 48px;
+        font-weight: bold;
+        color: brown;
+        z-index: 2;
+        position: relative;
+    }
+
+    .message {
+        margin-top: 20px;
+        font-size: 20px;
+        color: darkblue;
+        white-space: pre-line;
+        z-index: 2;
+        position: relative;
+    }
+
+    /* ---------- FLOATING LOVE TEXT ---------- */
+    .love {
+        position: absolute;
+        bottom: 20px;
+        background: lightpink;
+        color: deeppink;
+        padding: 10px 20px;
+        font-size: 22px;
+        font-weight: bold;
+        animation: move 10s linear infinite;
+    }
+
+    @keyframes move {
+        from { left: -100%; }
+        to { left: 100%; }
+    }
+
+    /* ---------- CONFETTI ---------- */
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        opacity: 0.9;
+        animation: fall 3.5s ease-out forwards;
+        z-index: 3;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        100% {
+            transform: translateY(110vh) rotate(720deg);
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div id="loginPage">
+    <h1>Enter the code 🤫</h1>
+    <input type="password" id="codeInput" placeholder="Secret code">
+    <button onclick="checkCode()">Unlock 💝</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="birthdayPage">
+    <div class="title">HAPPYY BIRTHDAY KUTTAAAA</div>
+
+    <div class="message">
+Hope u know u're loved n u're always special to me , enjoy ur day Kutta
+- with love ur kuttan 💗
+    </div>
+
+    <div class="love">
+        I LOVEEEEEEEEEEEEEEE YOUUUUUUUUUUUUUUU
+    </div>
+</div>
+
+<script>
+    const SECRET_CODE = "kuttaa"; // change if needed
+    let confettiLaunched = false;
+
+    function checkCode() {
+        const input = document.getElementById("codeInput").value;
+        if (input === SECRET_CODE) {
+            document.getElementById("loginPage").style.display = "none";
+            document.getElementById("birthdayPage").style.display = "block";
+
+            if (!confettiLaunched) {
+                launchConfettiOnce();
+                confettiLaunched = true;
+            }
+        } else {
+            alert("Wrong code 😜");
+        }
+    }
+
+    function launchConfettiOnce() {
+        const colors = ["#ff4d4d", "#ffd633", "#66ff99", "#66ccff", "#ff99ff"];
+
+        for (let i = 0; i < 80; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
+            confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+            // left top corner OR right top corner
+            confetti.style.left = Math.random() < 0.5 
+                ? Math.random() * 15 + "%" 
+                : Math.random() * 15 + 85 + "%";
+
+            confetti.style.top = "0px";
+            confetti.style.animationDelay = Math.random() * 0.4 + "s";
+
+            document.getElementById("birthdayPage").appendChild(confetti);
+        }
+    }
+</script>
+
+</body>
+</html>
